@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-func ParseProduct(product Product) Product {
+func ParseProduct(product Product, stockUrl string) Product {
 	c := colly.NewCollector(colly.AllowURLRevisit(),
 		colly.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"))
 
 	c.OnHTML("div.js-content-and-footer.content-and-footer", func(e *colly.HTMLElement) {
 		imgUrl := e.ChildAttr("img.js-catalog-detail__header-image-img.catalog-detail__header-image-img", "src")
-		product.ImgUrlProduct = imgUrl
+		product.ImgUrlProduct = stockUrl + imgUrl
 	})
 
 	c.OnHTML("div.catalog-detail__header-prices", func(e *colly.HTMLElement) {

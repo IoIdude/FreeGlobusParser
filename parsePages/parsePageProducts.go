@@ -25,7 +25,7 @@ func InitProducts(categoryId int, products *[]Product, stockURL string, categori
 
 				if productId != -1 {
 					(*products)[productId].ProductUrl = productUrl
-					(*products)[productId] = ParseProduct((*products)[productId])
+					(*products)[productId] = ParseProduct((*products)[productId], stockURL)
 				} else {
 					product := Product{
 						Id:          categoryId,
@@ -34,7 +34,7 @@ func InitProducts(categoryId int, products *[]Product, stockURL string, categori
 						Category:    categories[categoryId],
 					}
 
-					*products = append(*products, ParseProduct(product))
+					*products = append(*products, ParseProduct(product, stockURL))
 				}
 			}
 		}
